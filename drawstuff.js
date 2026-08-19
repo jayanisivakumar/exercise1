@@ -77,13 +77,35 @@ function main() {
     var h = context.canvas.height;  // as set in html
     var imagedata = context.createImageData(w,h);
  
-    // Draw a rectangle with pixels
-    var c = new Color(0,0,0,255); // the color at the pixel: black opaque
-    for (var x=50; x<100; x++) 
-        for (var y=50; y<75; y++) {
-            drawPixel(imagedata,x,y,c);
-            // console.log("draw at " +x+ " " +y);
+    // Draw a 200x120 block-textured rectangle with pixels
+    var c1 = new Color(255,192,203,255); // light pink
+    var c2 = new Color(238,130,238,255); // violet
+    var c3 = new Color(221,160,221,255); // plum
+    var c4 = new Color(255,182,193,255); // light pink variation
+
+    for (var x=150; x<350; x++) {
+        for (var y=180; y<300; y++) {
+
+            var blockX = Math.floor((x - 150) / 20);
+            var blockY = Math.floor((y - 180) / 20);
+
+            var pattern = (blockX + blockY) % 4;
+
+            if (pattern == 0) {
+                drawPixel(imagedata,x,y,c1);
+                // console.log("draw at " +x+ " " +y);
+            } else if (pattern == 1) {
+                drawPixel(imagedata,x,y,c2);
+                // console.log("draw at " +x+ " " +y);
+            } else if (pattern == 2) {
+                drawPixel(imagedata,x,y,c3);
+                // console.log("draw at " +x+ " " +y);
+            } else {
+                drawPixel(imagedata,x,y,c4);
+                // console.log("draw at " +x+ " " +y);
+            }
         }
+    }
     
     context.putImageData(imagedata, 0, 0); // display the image in the context
 }
